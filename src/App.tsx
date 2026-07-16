@@ -5,7 +5,6 @@ import Docs from './pages/Docs'
 import API from './pages/API'
 import Examples from './pages/Examples'
 import NotFound from './pages/NotFound'
-import './styles/globals.css'
 
 function App() {
   return (
