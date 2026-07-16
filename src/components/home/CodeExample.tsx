@@ -1,4 +1,4 @@
-import CodeBlock from '../ui/CodeBlock'
+﻿import CodeBlock from '../ui/CodeBlock'
 
 const queryCode = `-- Query Builder
 local users = User
@@ -16,23 +16,24 @@ local page = User:paginate({ page = 2, perPage = 20 })`
 
 export default function CodeExample() {
   return (
-    <section className="py-24 bg-zinc-900/30">
+    <section className="py-20 bg-zinc-900/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              Powerful Query Builder
-            </h2>
-            <p className="text-zinc-400 text-lg mb-6 leading-relaxed">
-              Build complex queries with a clean, chainable API. 
-              Supports WHERE, ORDER BY, LIMIT, pagination, and more.
+            <h2 className="text-2xl font-semibold text-white mb-4">Query builder</h2>
+            <p className="text-zinc-400 leading-relaxed mb-6">
+              Build queries with method chaining. No string interpolation, 
+              no SQL injection vectors. Conditions compile to parameterized queries.
             </p>
-            <ul className="space-y-3">
-              {['Chainable API', 'Lazy evaluation', 'Type-safe conditions', 'Eager loading'].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-zinc-300">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full" />
-                  </span>
+            <ul className="space-y-3 text-sm">
+              {[
+                'WHERE, ORDER BY, LIMIT, OFFSET',
+                'AND / OR with band() / bor()',
+                'Pagination helper',
+                'Aggregate functions: count, sum, average',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-zinc-400">
+                  <span className="mt-1.5 w-1 h-1 bg-emerald-500 rounded-full flex-shrink-0" />
                   {item}
                 </li>
               ))}
