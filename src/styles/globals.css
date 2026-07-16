@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+pre {
+  background-color: #1e293b !important;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
