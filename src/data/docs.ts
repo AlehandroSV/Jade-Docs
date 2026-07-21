@@ -104,15 +104,18 @@ jade.configure({
         code: `-- Create
 local user = User:create({ name = "Lucas", email = "lucas@email.com" })
 
--- Read
-local user = User:find(1)
-local users = User:where(User.active:eq(true)):get()
+-- Read (polymorphic)
+local user = User:find(1)                                    -- by ID
+local users = User:find({ where = { active = true } })      -- with conditions
+local admin = User:findFirst({ where = { role = "admin" } }) -- find first
 
--- Update
-user:update({ name = "New Name" })
+-- Update (polymorphic)
+User:update(1, { name = "New Name" })                        -- by ID
+User:update({ where = { role = "user" }, data = { role = "admin" } }) -- with conditions
 
--- Delete
-user:delete()`,
+-- Delete (polymorphic)
+User:delete(1)                                               -- by ID
+User:delete({ where = { active = false } })                  -- with conditions`,
       },
     ],
   },

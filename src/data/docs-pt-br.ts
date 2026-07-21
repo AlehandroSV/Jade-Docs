@@ -89,15 +89,18 @@ jade.configure({
         code: `-- Criar
 local user = User:create({ name = "Lucas", email = "lucas@email.com" })
 
--- Ler
-local user = User:find(1)
-local users = User:where(User.active:eq(true)):get()
+-- Ler (polimórfico)
+local user = User:find(1)                                    -- por ID
+local users = User:find({ where = { active = true } })      -- com condições
+local admin = User:findFirst({ where = { role = "admin" } }) -- buscar primeiro
 
--- Atualizar
-user:update({ name = "Novo Nome" })
+-- Atualizar (polimórfico)
+User:update(1, { name = "Novo Nome" })                       -- por ID
+User:update({ where = { role = "user" }, data = { role = "admin" } }) -- com condições
 
--- Deletar
-user:delete()`,
+-- Deletar (polimórfico)
+User:delete(1)                                               -- por ID
+User:delete({ where = { active = false } })                  -- com condições`,
       },
     ],
   },

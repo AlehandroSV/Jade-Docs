@@ -16,11 +16,43 @@ export interface ApiOperator {
 export const entityMethods: ApiMethod[] = [
   {
     name: 'find',
-    signature: 'Entity:find(id)',
-    description: 'Find a single record by primary key.',
+    signature: 'Entity:find(id | options)',
+    description: 'Find records. Polymorphic: by ID or with options.',
+    returns: 'Instance | Instance[] | nil',
+    example: `-- By ID
+local user = User:find(1)
+
+-- With options
+local users = User:find({ where = { active = true } })
+local filtered = User:find({ where = { role = "admin" }, orderBy = { name = "asc" }, limit = 10 })`,
+  },
+  {
+    name: 'findFirst',
+    signature: 'Entity:findFirst(options)',
+    description: 'Find the first matching record.',
     returns: 'Instance | nil',
-    example: `local user = User:find(1)
-print(user.name) -- "Lucas"`,
+    example: `local admin = User:findFirst({ where = { role = "admin" } })`,
+  },
+  {
+    name: 'findFirstOrThrow',
+    signature: 'Entity:findFirstOrThrow(options)',
+    description: 'Find the first matching record or throw an error.',
+    returns: 'Instance',
+    example: `local admin = User:findFirstOrThrow({ where = { role = "admin" } })`,
+  },
+  {
+    name: 'findUnique',
+    signature: 'Entity:findUnique(options)',
+    description: 'Find a record by a unique field.',
+    returns: 'Instance | nil',
+    example: `local user = User:findUnique({ where = { email = "lucas@email.com" } })`,
+  },
+  {
+    name: 'findUniqueOrThrow',
+    signature: 'Entity:findUniqueOrThrow(options)',
+    description: 'Find a record by a unique field or throw an error.',
+    returns: 'Instance',
+    example: `local user = User:findUniqueOrThrow({ where = { email = "lucas@email.com" } })`,
   },
   {
     name: 'first',
@@ -52,24 +84,40 @@ print(user.name) -- "Lucas"`,
   },
   {
     name: 'update',
-    signature: 'Entity:update(id, data)',
-    description: 'Update a record by primary key.',
-    returns: 'Instance',
-    example: `User:update(1, { name: "New Name" })`,
+    signature: 'Entity:update(id | options, data?)',
+    description: 'Update records. Polymorphic: by ID or with conditions.',
+    returns: 'Instance | number',
+    example: `-- By ID
+User:update(1, { name = "New Name" })
+
+-- With conditions
+User:update({ where = { role = "user" }, data = { role = "admin" } })`,
   },
   {
     name: 'delete',
-    signature: 'Entity:delete(id)',
-    description: 'Delete a record by primary key.',
-    returns: 'Instance',
-    example: `User:delete(1)`,
+    signature: 'Entity:delete(id | options)',
+    description: 'Delete records. Polymorphic: by ID or with conditions.',
+    returns: 'Instance | number',
+    example: `-- By ID
+User:delete(1)
+
+-- With conditions
+User:delete({ where = { active = false } })`,
   },
   {
     name: 'count',
-    signature: 'Entity:count()',
-    description: 'Count all matching records.',
+    signature: 'Entity:count(options?)',
+    description: 'Count records, optionally with conditions.',
     returns: 'number',
-    example: `local total = User:count()`,
+    example: `local total = User:count()
+local admins = User:count({ where = { role = "admin" } })`,
+  },
+  {
+    name: 'exists',
+    signature: 'Entity:exists(options?)',
+    description: 'Check if any records match, optionally with conditions.',
+    returns: 'boolean',
+    example: `User:exists({ where = { email = "lucas@email.com" } })`,
   },
   {
     name: 'sum',
@@ -105,13 +153,6 @@ print(user.name) -- "Lucas"`,
     description: 'Paginate results with page and perPage.',
     returns: '{ items, total, page, perPage, lastPage }',
     example: `local page = User:paginate({ page = 2, perPage = 20 })`,
-  },
-  {
-    name: 'exists',
-    signature: 'Entity:exists()',
-    description: 'Check if any records match the query.',
-    returns: 'boolean',
-    example: `if User:where(User.email:eq("test@test.com")):exists() then ... end`,
   },
 ]
 
