@@ -73,6 +73,8 @@ export const en = {
   'sidebar.callbacks': 'Callbacks',
   'sidebar.validations': 'Validations',
   'sidebar.softDelete': 'Soft Delete',
+  'sidebar.linter': 'Linter',
+  'sidebar.linterVscode': 'Linter (VS Code)',
   'sidebar.reference': 'Reference',
   'sidebar.errorCodes': 'Error Codes',
   'sidebar.testing': 'Testing',

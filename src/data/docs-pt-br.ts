@@ -851,4 +851,125 @@ end)`,
       },
     ],
   },
+  {
+    id: 'linter',
+    title: 'Linter (VS Code)',
+    description: 'Suporte a IDE, validação em tempo real e detecção automática de relacionamentos para arquivos de schema Jade.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'O Jade tem uma extensão oficial do VS Code que fornece validação de schema em tempo real, auto-completion e detecção automática de relacionamentos. Funciona com qualquer arquivo .lua contendo código de schema Jade.',
+      },
+      { type: 'heading', text: 'Instalação', level: 3 },
+      {
+        type: 'list',
+        items: [
+          'Abra o VS Code',
+          'Pressione Ctrl+Shift+X para abrir Extensões',
+          'Pesquise "Jade Linter"',
+          'Clique em Instalar',
+        ],
+      },
+      { type: 'heading', text: 'Funcionalidades', level: 3 },
+      {
+        type: 'list',
+        items: [
+          '**Syntax Highlighting** — Tipos e modificadores Jade destacados em arquivos .lua',
+          '**Auto-Completion** — Sugestões para tipos (jade.), modificadores (:primaryKey(), :foreignKey()), nomes de tabelas e modelos',
+          '**Linting** — Detecção de erros em tempo real para tipos inválidos, modificadores ausentes e referências quebradas',
+          '**Deteccao Automatica de Relacoes** — Infere relações belongsTo a partir de :foreignKey() e convenções de nomenclatura _id',
+          '**Hover** — Documentação ao passar o mouse sobre tipos, modificadores, relações e campos FK',
+          '**Validacao Cross-File** — Valida referências entre todos os arquivos de schema no workspace',
+          '**Formatacao** — Formatação automática de arquivos de schema ao salvar',
+        ],
+      },
+      { type: 'heading', text: 'Deteccao Automatica de Relacoes', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'O linter detecta automaticamente relacionamentos entre entidades de duas formas:',
+      },
+      { type: 'heading', text: 'Modificador :foreignKey() explícito', level: 4 },
+      {
+        type: 'paragraph',
+        text: 'Quando um campo tem :foreignKey("table", "column"), o linter infere uma relação belongsTo:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'foreignKey explícito',
+        code: `local jade = require("jade")
+
+local User = jade.Entity("users", {
+    id = jade.Integer():primaryKey(),
+    name = jade.String(120):notNull(),
+})
+
+local Post = jade.Entity("posts", {
+    id = jade.Integer():primaryKey(),
+    title = jade.String(255):notNull(),
+    user_id = jade.Integer():foreignKey("users", "id"),
+    -- Linter infere: Post belongsTo User (via user_id)
+})`,
+      },
+      { type: 'heading', text: 'Convenção de nomenclatura _id', level: 4 },
+      {
+        type: 'paragraph',
+        text: 'Quando um campo termina com _id e a tabela alvo existe no schema, o linter infere belongsTo automaticamente:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Detecção por convenção',
+        code: `local User = jade.Entity("users", {
+    id = jade.Integer():primaryKey(),
+})
+
+local Post = jade.Entity("posts", {
+    id = jade.Integer():primaryKey(),
+    user_id = jade.Integer():notNull(),
+    -- Linter infere: Post belongsTo User
+    -- (pois a tabela "users" existe no schema)
+})`,
+      },
+      {
+        type: 'callout',
+        variant: 'tip',
+        text: 'Tipos FK suportados: Integer, BigInt, UUID, CUID, NanoID. O linter verifica se a tabela alvo existe antes de inferir a relação.',
+      },
+      { type: 'heading', text: 'Diagnósticos', level: 3 },
+      {
+        type: 'table',
+        headers: ['Nível', 'Exemplo'],
+        rows: [
+          ['Erro', 'Tipo inválido (jade.Foo()), modificador desconhecido (:bar()), referência a model inexistente'],
+          ['Aviso', 'String sem tamanho, created_at sem defaultNow()'],
+          ['Informação', 'Primary key automática em id, relação belongsTo inferida'],
+        ],
+      },
+      { type: 'heading', text: 'Hover', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Ao passar o mouse sobre tipos, mostra o equivalente SQL e os modificadores disponíveis. Ao passar sobre um campo *_id, mostra a relação inferida:',
+      },
+      {
+        type: 'code',
+        language: 'text',
+        title: 'Hover em campo FK',
+        code: `**user_id** (ForeignKey)
+Infere: belongsTo → User`,
+      },
+      { type: 'heading', text: 'Configuração', level: 3 },
+      {
+        type: 'table',
+        headers: ['Setting', 'Padrão', 'Descrição'],
+        rows: [
+          ['jade.schema.path', 'schema/init.lua', 'Caminho para o arquivo de schema'],
+          ['jade.linting.enabled', 'true', 'Habilitar linting'],
+          ['jade.completion.enabled', 'true', 'Habilitar auto-completion'],
+          ['jade.formatting.enabled', 'true', 'Habilitar formatação'],
+          ['jade.formatting.formatOnSave', 'false', 'Formatar ao salvar'],
+        ],
+      },
+    ],
+  },
 ]

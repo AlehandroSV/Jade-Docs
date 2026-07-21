@@ -79,6 +79,14 @@ export const docsSidebar: NavItem[] = [
     ],
   },
   {
+    href: '/docs/linter',
+    label: 'Linter',
+    labelKey: 'sidebar.linter',
+    children: [
+      { href: '/docs/linter', label: 'Linter (VS Code)', labelKey: 'sidebar.linterVscode' },
+    ],
+  },
+  {
     href: '/docs/error-codes',
     label: 'Reference',
     labelKey: 'sidebar.reference',

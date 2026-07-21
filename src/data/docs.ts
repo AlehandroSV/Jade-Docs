@@ -866,4 +866,125 @@ end)`,
       },
     ],
   },
+  {
+    id: 'linter',
+    title: 'Linter (VS Code)',
+    description: 'IDE support, real-time validation, and auto-relation detection for Jade schema files.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Jade has an official VS Code extension that provides real-time schema validation, auto-completion, and automatic relation detection. It works with any .lua file containing Jade schema code.',
+      },
+      { type: 'heading', text: 'Installation', level: 3 },
+      {
+        type: 'list',
+        items: [
+          'Open VS Code',
+          'Press Ctrl+Shift+X to open Extensions',
+          'Search for "Jade Linter"',
+          'Click Install',
+        ],
+      },
+      { type: 'heading', text: 'Features', level: 3 },
+      {
+        type: 'list',
+        items: [
+          '**Syntax Highlighting** — Jade types and modifiers highlighted in .lua files',
+          '**Auto-Completion** — Suggestions for types (jade.), modifiers (:primaryKey(), :foreignKey()), table names, and model names',
+          '**Linting** — Real-time error detection for invalid types, missing modifiers, and broken references',
+          '**Auto-Relation Detection** — Infers belongsTo relations from :foreignKey() and _id naming conventions',
+          '**Hover** — Documentation on hover for types, modifiers, relations, and FK fields',
+          '**Cross-File Validation** — Validates references across all schema files in the workspace',
+          '**Formatting** — Auto-format schema files on save',
+        ],
+      },
+      { type: 'heading', text: 'Auto-Relation Detection', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'The linter automatically detects relationships between entities in two ways:',
+      },
+      { type: 'heading', text: 'Explicit :foreignKey() modifier', level: 4 },
+      {
+        type: 'paragraph',
+        text: 'When a field has :foreignKey("table", "column"), the linter infers a belongsTo relation:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Explicit foreignKey',
+        code: `local jade = require("jade")
+
+local User = jade.Entity("users", {
+    id = jade.Integer():primaryKey(),
+    name = jade.String(120):notNull(),
+})
+
+local Post = jade.Entity("posts", {
+    id = jade.Integer():primaryKey(),
+    title = jade.String(255):notNull(),
+    user_id = jade.Integer():foreignKey("users", "id"),
+    -- Linter infers: Post belongsTo User (via user_id)
+})`,
+      },
+      { type: 'heading', text: '_id naming convention', level: 4 },
+      {
+        type: 'paragraph',
+        text: 'When a field ends with _id and the target table exists in the schema, the linter infers belongsTo automatically:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Convention-based detection',
+        code: `local User = jade.Entity("users", {
+    id = jade.Integer():primaryKey(),
+})
+
+local Post = jade.Entity("posts", {
+    id = jade.Integer():primaryKey(),
+    user_id = jade.Integer():notNull(),
+    -- Linter infers: Post belongsTo User
+    -- (because "users" table exists in the schema)
+})`,
+      },
+      {
+        type: 'callout',
+        variant: 'tip',
+        text: 'Supported FK types: Integer, BigInt, UUID, CUID, NanoID. The linter checks if the target table exists before inferring the relation.',
+      },
+      { type: 'heading', text: 'Diagnostics', level: 3 },
+      {
+        type: 'table',
+        headers: ['Level', 'Example'],
+        rows: [
+          ['Error', 'Invalid type (jade.Foo()), unknown modifier (:bar()), missing model reference'],
+          ['Warning', 'String without length, created_at without defaultNow()'],
+          ['Information', 'Auto primary key on id, inferred belongsTo relation'],
+        ],
+      },
+      { type: 'heading', text: 'Hover', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Hovering over types shows the SQL equivalent and available modifiers. Hovering over a *_id field shows the inferred relation:',
+      },
+      {
+        type: 'code',
+        language: 'text',
+        title: 'Hover on FK field',
+        code: `**user_id** (ForeignKey)
+Infers: belongsTo → User`,
+      },
+      { type: 'heading', text: 'Configuration', level: 3 },
+      {
+        type: 'table',
+        headers: ['Setting', 'Default', 'Description'],
+        rows: [
+          ['jade.schema.path', 'schema/init.lua', 'Path to schema file'],
+          ['jade.linting.enabled', 'true', 'Enable linting'],
+          ['jade.completion.enabled', 'true', 'Enable auto-completion'],
+          ['jade.formatting.enabled', 'true', 'Enable formatting'],
+          ['jade.formatting.formatOnSave', 'false', 'Format on save'],
+        ],
+      },
+    ],
+  },
 ]

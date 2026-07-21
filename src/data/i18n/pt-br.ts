@@ -73,6 +73,8 @@ export const ptBr = {
   'sidebar.callbacks': 'Callbacks',
   'sidebar.validations': 'Validações',
   'sidebar.softDelete': 'Soft Delete',
+  'sidebar.linter': 'Linter',
+  'sidebar.linterVscode': 'Linter (VS Code)',
   'sidebar.reference': 'Referência',
   'sidebar.errorCodes': 'Códigos de Erro',
   'sidebar.testing': 'Testes',
