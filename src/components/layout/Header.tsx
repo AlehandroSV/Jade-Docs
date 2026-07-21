@@ -2,14 +2,17 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { mainNav } from '../../data/navigation'
 import VersionSelector from '../ui/VersionSelector'
+import LanguageSelector from '../ui/LanguageSelector'
 import Logo from '../ui/Logo'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
+  const { t } = useLanguage()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
@@ -30,7 +33,7 @@ export default function Header() {
                     : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                {link.label}
+                {t(link.labelKey as any)}
               </Link>
             ))}
             <a
@@ -43,16 +46,17 @@ export default function Header() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="https://luarocks.org/modules/alehandrosv/jade"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
             >
-              Install
+              {t('nav.install')}
             </a>
 
+            <LanguageSelector />
             <VersionSelector />
 
             <button
@@ -83,7 +87,7 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-3 py-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm rounded-md"
               >
-                {link.label}
+                {t(link.labelKey as any)}
               </Link>
             ))}
           </div>
