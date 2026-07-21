@@ -169,6 +169,12 @@ end`,
   {
     id: 'v1.1.0',
     label: 'v1.1.0',
+    isLatest: false,
+    sections: docsSections,
+  },
+  {
+    id: 'v1.2.0',
+    label: 'v1.2.0',
     isLatest: true,
     sections: docsSections,
   },
