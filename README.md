@@ -1,32 +1,56 @@
-# React + TypeScript + Vite
+# Jade Docs
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Documentation website for [Jade ORM](https://github.com/AlehandroSV/Jade) - a modern Lua ORM for PostgreSQL, MySQL, and SQLite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript
+- Vite 8
+- Tailwind CSS v4
+- React Router v7
+- React Syntax Highlighter
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the Oxlint configuration
+# Start dev server
+npm run dev
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+# Build for production
+npm run build
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Preview production build
+npm run preview
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Deployment
+
+This project is deployed to Vercel. Push to `main` to trigger automatic deployment.
+
+## Structure
+
+```
+src/
+├── components/
+│   ├── home/          # Home page sections (Hero, Features, etc.)
+│   ├── layout/        # Layout, Header, Footer
+│   └── ui/            # Reusable UI components (CodeBlock, DocRenderer)
+├── contexts/          # React contexts (ThemeContext)
+├── data/              # Documentation content (docs.ts, api.ts, examples.ts)
+├── pages/             # Page components (Home, Docs, API, Examples)
+└── index.css          # Tailwind imports + base styles
+```
+
+## Content
+
+Documentation content is defined in `src/data/` as TypeScript data files:
+
+- `docs.ts` - All documentation sections
+- `api.ts` - API reference (methods, operators)
+- `examples.ts` - Code examples
+- `navigation.ts` - Sidebar and navigation structure
+
+To add or update documentation, edit the corresponding data file.

@@ -1,34 +1,31 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../../contexts/ThemeContext'
+import { mainNav } from '../../data/navigation'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
-
-  const navLinks = [
-    { href: '/docs', label: 'Docs' },
-    { href: '/api', label: 'API' },
-    { href: '/examples', label: 'Examples' },
-  ]
+  const { theme, toggleTheme } = useTheme()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-800">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
-          <Link to="/" className="text-white font-semibold text-lg tracking-tight">
+          <Link to="/" className="text-zinc-900 dark:text-white font-semibold text-lg tracking-tight">
             Jade
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {mainNav.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 className={`px-3 py-1.5 text-sm rounded-md transition ${
                   location.pathname.startsWith(link.href)
-                    ? 'text-white bg-zinc-800'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800'
+                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
                 {link.label}
@@ -38,7 +35,7 @@ export default function Header() {
               href="https://github.com/AlehandroSV/Jade"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 text-sm text-zinc-400 hover:text-white transition"
+              className="px-3 py-1.5 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
             >
               GitHub
             </a>
@@ -49,13 +46,22 @@ export default function Header() {
               href="https://luarocks.org/modules/alehandrosv/jade"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex text-sm text-zinc-400 hover:text-white transition"
+              className="hidden sm:inline-flex text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
             >
               Install
             </a>
+
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 text-zinc-400 hover:text-white"
+              className="md:hidden p-1.5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -64,14 +70,14 @@ export default function Header() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-zinc-800 bg-[#09090b]">
+        <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#09090b]">
           <div className="px-4 py-3 space-y-1">
-            {navLinks.map((link) => (
+            {mainNav.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 text-zinc-400 hover:text-white text-sm rounded-md"
+                className="block px-3 py-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm rounded-md"
               >
                 {link.label}
               </Link>

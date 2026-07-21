@@ -1,4 +1,6 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 * {
   margin: 0;
@@ -8,9 +10,20 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Light theme (default) */
+body {
+  background: #ffffff;
+  color: #09090b;
+}
+
+/* Dark theme */
+.dark body,
+.dark {
   background: #09090b;
   color: #fafafa;
-  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
