@@ -24,46 +24,46 @@ export default function Docs() {
   const availableSectionIds = new Set(currentVersion.sections.map(s => s.id))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12">
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <nav className="space-y-4">
-            {docsSidebar.map((group) => {
-              // Filter children to only available sections
-              const availableChildren = group.children?.filter(
-                child => availableSectionIds.has(child.href.split('/').pop() || '')
-              )
+    <div className="flex h-[calc(100vh-3.5rem)]">
+      {/* Fixed sidebar */}
+      <aside className="w-64 flex-shrink-0 border-r border-zinc-200 dark:border-zinc-800 overflow-y-auto hidden lg:block">
+        <nav className="p-4 space-y-4">
+          {docsSidebar.map((group) => {
+            const availableChildren = group.children?.filter(
+              child => availableSectionIds.has(child.href.split('/').pop() || '')
+            )
 
-              // Skip group if no children are available
-              if (!availableChildren || availableChildren.length === 0) return null
+            if (!availableChildren || availableChildren.length === 0) return null
 
-              return (
-                <div key={group.href}>
-                  <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-400 text-zinc-500 uppercase tracking-wider mb-2 px-3">
-                    {group.labelKey ? t(group.labelKey as any) : group.label}
-                  </div>
-                  <div className="space-y-0.5">
-                    {availableChildren.map((link) => (
-                      <Link
-                        key={link.href}
-                        to={link.href}
-                        className={`block px-3 py-1.5 text-sm rounded-md transition ${
-                          link.href.includes(section)
-                            ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800'
-                            : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
-                        }`}
-                      >
-                        {link.labelKey ? t(link.labelKey as any) : link.label}
-                      </Link>
-                    ))}
-                  </div>
+            return (
+              <div key={group.href}>
+                <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-3">
+                  {t(group.labelKey as any)}
                 </div>
-              )
-            })}
-          </nav>
-        </aside>
+                <div className="space-y-0.5">
+                  {availableChildren.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className={`block px-3 py-1.5 text-sm rounded-md transition ${
+                        link.href.includes(section)
+                          ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800'
+                          : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+                      }`}
+                    >
+                      {t(link.labelKey as any)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </nav>
+      </aside>
 
-        <article className="min-w-0">
+      {/* Scrollable content */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
           <div className="flex items-center gap-3 mb-6">
             <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
               {current.title}
@@ -82,8 +82,8 @@ export default function Docs() {
           <div className="text-zinc-300">
             <DocRenderer content={current.content} />
           </div>
-        </article>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
