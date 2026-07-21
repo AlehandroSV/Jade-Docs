@@ -13,19 +13,19 @@ export interface Version {
 export const versions: Version[] = [
   {
     id: 'v1.0.0',
-    label: 'v1.0.0',
+    label: 'v1.0.*',
     isLatest: false,
     sections: docsSectionsV1_0_0,
   },
   {
     id: 'v1.1.0',
-    label: 'v1.1.0',
+    label: 'v1.1.*',
     isLatest: false,
     sections: docsSectionsV1_1_0,
   },
   {
     id: 'v1.2.0',
-    label: 'v1.2.0',
+    label: 'v1.2.*',
     isLatest: false,
     sections: docsSectionsV1_2_0,
   },
