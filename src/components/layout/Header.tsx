@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 import { mainNav } from '../../data/navigation'
+import VersionSelector from '../ui/VersionSelector'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -50,6 +51,8 @@ export default function Header() {
             >
               Install
             </a>
+
+            <VersionSelector />
 
             <button
               onClick={toggleTheme}
