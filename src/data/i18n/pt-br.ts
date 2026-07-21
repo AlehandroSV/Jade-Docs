@@ -62,6 +62,7 @@ export const ptBr = {
   'sidebar.columnTypes': 'Tipos de Coluna',
   'sidebar.columnModifiers': 'Modificadores de Coluna',
   'sidebar.relations': 'Relações',
+  'sidebar.nestedCreates': 'Nested Creates',
   'sidebar.queryBuilder': 'Query Builder',
   'sidebar.security': 'Segurança',
   'sidebar.encryption': 'Encriptação',

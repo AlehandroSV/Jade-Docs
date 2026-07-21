@@ -62,6 +62,7 @@ export const en = {
   'sidebar.columnTypes': 'Column Types',
   'sidebar.columnModifiers': 'Column Modifiers',
   'sidebar.relations': 'Relations',
+  'sidebar.nestedCreates': 'Nested Creates',
   'sidebar.queryBuilder': 'Query Builder',
   'sidebar.security': 'Security',
   'sidebar.encryption': 'Encryption',

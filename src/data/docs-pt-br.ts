@@ -852,6 +852,149 @@ end)`,
     ],
   },
   {
+    id: 'nested-creates',
+    title: 'Nested Creates',
+    description: 'Crie registros relacionados inline com connect, create e connectOrCreate.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Jade suporta criar registros relacionados inline ao chamar create() ou update(). Em vez de criar cada registro manualmente e vinculá-los com foreign keys, você pode usar instruções aninhadas.',
+      },
+      { type: 'heading', text: 'Connect — Referenciar um registro existente', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Use connect para vincular a um registro existente pelos seus campos únicos:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Connect por ID',
+        code: `local post = Post:create({
+    title = "Meu Primeiro Post",
+    user = { connect = { id = 1 } },
+})`,
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Connect por campo único',
+        code: `local post = Post:create({
+    title = "Meu Primeiro Post",
+    user = { connect = { email = "alice@exemplo.com" } },
+})`,
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Shorthand',
+        code: `-- { id = N } é equivalente a { connect = { id = N } }
+local post = Post:create({
+    title = "Meu Primeiro Post",
+    user = { id = 1 },
+})`,
+      },
+      { type: 'heading', text: 'Create — Criar um novo registro relacionado', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Use create para criar um novo registro relacionado inline. O pai e o filho são criados juntos:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Create com novo usuário',
+        code: `local post = Post:create({
+    title = "Meu Primeiro Post",
+    user = {
+        create = { name = "Alice", email = "alice@exemplo.com" },
+    },
+})`,
+      },
+      { type: 'heading', text: 'ConnectOrCreate — Encontrar ou criar', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Use connectOrCreate para encontrar um registro existente que corresponda ao where, ou criá-lo se não for encontrado:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Connect ou create',
+        code: `local post = Post:create({
+    title = "Meu Primeiro Post",
+    user = {
+        connectOrCreate = {
+            where = { email = "alice@exemplo.com" },
+            create = { name = "Alice", email = "alice@exemplo.com" },
+        },
+    },
+})`,
+      },
+      { type: 'heading', text: 'HasMany — Criar múltiplos filhos', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Para relações hasMany, passe um array de operações para criar múltiplos registros filhos de uma vez:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Criar usuário com posts',
+        code: `local user = User:create({
+    name = "Alice",
+    email = "alice@exemplo.com",
+    posts = {
+        { create = { title = "Primeiro Post" } },
+        { create = { title = "Segundo Post" } },
+        { create = { title = "Terceiro Post" } },
+    },
+})`,
+      },
+      { type: 'heading', text: 'Update com relações aninhadas', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Relações aninhadas também funcionam com update(). Você pode alterar para qual registro uma relação aponta:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Reatribuir post para outro usuário',
+        code: `local post = Post:find(1)
+post:update({
+    title = "Título Atualizado",
+    user = { connect = { id = 2 } },
+})`,
+      },
+      { type: 'heading', text: 'Métodos do Proxy', level: 3 },
+      {
+        type: 'paragraph',
+        text: 'Após carregar uma relação, você pode usar métodos do proxy para criar, conectar ou desconectar registros relacionados:',
+      },
+      {
+        type: 'code',
+        language: 'lua',
+        title: 'Proxy create, connect, disconnect',
+        code: `local user = User:find(1)
+
+-- Criar um post para este usuário
+user.posts:create({ title = "Novo Post" })
+
+-- Conectar um post existente
+user.posts:connect(5)
+
+-- Desconectar um post
+user.posts:disconnect(5)`,
+      },
+      {
+        type: 'callout',
+        variant: 'info',
+        text: 'Ordem de execução: relações belongsTo são resolvidas primeiro (para obter o FK), depois o registro principal é criado, e por último os filhos hasMany/hasOne/hasAndBelongsToMany.',
+      },
+      {
+        type: 'callout',
+        variant: 'warning',
+        text: 'Se um nested create falhar na validação, toda a operação é revertida. Nenhum dado parcial é salvo.',
+      },
+    ],
+  },
+  {
     id: 'linter',
     title: 'Linter (VS Code)',
     description: 'Suporte a IDE, validação em tempo real e detecção automática de relacionamentos para arquivos de schema Jade.',

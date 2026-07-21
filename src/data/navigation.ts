@@ -39,6 +39,7 @@ export const docsSidebar: NavItem[] = [
     labelKey: 'sidebar.relations',
     children: [
       { href: '/docs/relations', label: 'Overview', labelKey: 'sidebar.overview' },
+      { href: '/docs/nested-creates', label: 'Nested Creates', labelKey: 'sidebar.nestedCreates' },
     ],
   },
   {
