@@ -27,9 +27,9 @@ function DocItem({ item }: { item: DocContent }) {
 
     case 'heading': {
       const className = {
-        2: 'text-2xl font-bold tracking-tight text-white dark:text-white text-zinc-900 mt-10 mb-4',
-        3: 'text-lg font-semibold text-white dark:text-white text-zinc-900 mt-8 mb-3',
-        4: 'text-base font-medium text-white dark:text-white text-zinc-900 mt-6 mb-2',
+        2: 'text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mt-12 mb-4 pb-2 border-b border-zinc-200 dark:border-zinc-800',
+        3: 'text-lg font-semibold text-zinc-800 dark:text-zinc-100 mt-8 mb-3',
+        4: 'text-sm font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400 mt-6 mb-2',
       }[item.level]
       if (item.level === 2) return <h2 className={className}>{item.text}</h2>
       if (item.level === 3) return <h3 className={className}>{item.text}</h3>

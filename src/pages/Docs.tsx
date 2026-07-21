@@ -27,8 +27,8 @@ export default function Docs() {
     <div className="flex h-[calc(100vh-3.5rem)]">
       {/* Fixed sidebar */}
       <aside className="w-64 flex-shrink-0 border-r border-zinc-200 dark:border-zinc-800 overflow-y-auto hidden lg:block">
-        <nav className="p-4 space-y-4">
-          {docsSidebar.map((group) => {
+        <nav className="p-4 space-y-6">
+          {docsSidebar.map((group, groupIndex) => {
             const availableChildren = group.children?.filter(
               child => availableSectionIds.has(child.href.split('/').pop() || '')
             )
@@ -37,7 +37,10 @@ export default function Docs() {
 
             return (
               <div key={group.href}>
-                <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2 px-3">
+                {groupIndex > 0 && (
+                  <div className="border-t border-zinc-100 dark:border-zinc-800 mb-4" />
+                )}
+                <div className="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.1em] mb-2 px-3">
                   {t(group.labelKey as any)}
                 </div>
                 <div className="space-y-0.5">
@@ -45,10 +48,10 @@ export default function Docs() {
                     <Link
                       key={link.href}
                       to={link.href}
-                      className={`block px-3 py-1.5 text-sm rounded-md transition ${
+                      className={`block px-3 py-1.5 text-[13px] rounded-md transition ${
                         link.href.includes(section)
-                          ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800'
-                          : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+                          ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800 font-medium border-l-2 border-emerald-500'
+                          : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-800/50'
                       }`}
                     >
                       {t(link.labelKey as any)}
