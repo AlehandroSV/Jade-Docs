@@ -6,77 +6,85 @@ export interface NavItem {
 }
 
 export const mainNav: NavItem[] = [
-  { href: '/docs', label: 'Docs' },
-  { href: '/api', label: 'API' },
-  { href: '/examples', label: 'Examples' },
+  { href: '/docs', label: 'Docs', labelKey: 'nav.docs' },
+  { href: '/api', label: 'API', labelKey: 'nav.api' },
+  { href: '/examples', label: 'Examples', labelKey: 'nav.examples' },
 ]
 
 export const docsSidebar: NavItem[] = [
   {
     href: '/docs/introduction',
     label: 'Getting Started',
+    labelKey: 'sidebar.gettingStarted',
     children: [
-      { href: '/docs/introduction', label: 'Introduction' },
-      { href: '/docs/installation', label: 'Installation' },
-      { href: '/docs/quick-start', label: 'Quick Start' },
-      { href: '/docs/configuration', label: 'Configuration' },
+      { href: '/docs/introduction', label: 'Introduction', labelKey: 'sidebar.introduction' },
+      { href: '/docs/installation', label: 'Installation', labelKey: 'sidebar.installation' },
+      { href: '/docs/quick-start', label: 'Quick Start', labelKey: 'sidebar.quickStart' },
+      { href: '/docs/configuration', label: 'Configuration', labelKey: 'sidebar.configuration' },
     ],
   },
   {
     href: '/docs/schema',
     label: 'Schema',
+    labelKey: 'sidebar.schema',
     children: [
-      { href: '/docs/schema', label: 'Overview' },
-      { href: '/docs/column-types', label: 'Column Types' },
-      { href: '/docs/column-modifiers', label: 'Column Modifiers' },
+      { href: '/docs/schema', label: 'Overview', labelKey: 'sidebar.overview' },
+      { href: '/docs/column-types', label: 'Column Types', labelKey: 'sidebar.columnTypes' },
+      { href: '/docs/column-modifiers', label: 'Column Modifiers', labelKey: 'sidebar.columnModifiers' },
     ],
   },
   {
     href: '/docs/relations',
     label: 'Relations',
+    labelKey: 'sidebar.relations',
     children: [
-      { href: '/docs/relations', label: 'Overview' },
+      { href: '/docs/relations', label: 'Overview', labelKey: 'sidebar.overview' },
     ],
   },
   {
     href: '/docs/query-builder',
     label: 'Query Builder',
+    labelKey: 'sidebar.queryBuilder',
     children: [
-      { href: '/docs/query-builder', label: 'Overview' },
+      { href: '/docs/query-builder', label: 'Overview', labelKey: 'sidebar.overview' },
     ],
   },
   {
     href: '/docs/encryption',
     label: 'Security',
+    labelKey: 'sidebar.security',
     children: [
-      { href: '/docs/encryption', label: 'Encryption' },
-      { href: '/docs/security', label: 'Security Features' },
+      { href: '/docs/encryption', label: 'Encryption', labelKey: 'sidebar.encryption' },
+      { href: '/docs/security', label: 'Security Features', labelKey: 'sidebar.securityFeatures' },
     ],
   },
   {
     href: '/docs/migrations',
     label: 'Migrations',
+    labelKey: 'sidebar.migrations',
     children: [
-      { href: '/docs/migrations', label: 'Overview' },
-      { href: '/docs/cli', label: 'CLI (Esmeralda)' },
+      { href: '/docs/migrations', label: 'Overview', labelKey: 'sidebar.overview' },
+      { href: '/docs/cli', label: 'CLI (Esmeralda)', labelKey: 'sidebar.cli' },
     ],
   },
   {
     href: '/docs/transactions',
     label: 'Advanced',
+    labelKey: 'sidebar.advanced',
     children: [
-      { href: '/docs/transactions', label: 'Transactions' },
-      { href: '/docs/callbacks', label: 'Callbacks' },
-      { href: '/docs/validations', label: 'Validations' },
-      { href: '/docs/soft-delete', label: 'Soft Delete' },
+      { href: '/docs/transactions', label: 'Transactions', labelKey: 'sidebar.transactions' },
+      { href: '/docs/callbacks', label: 'Callbacks', labelKey: 'sidebar.callbacks' },
+      { href: '/docs/validations', label: 'Validations', labelKey: 'sidebar.validations' },
+      { href: '/docs/soft-delete', label: 'Soft Delete', labelKey: 'sidebar.softDelete' },
     ],
   },
   {
     href: '/docs/error-codes',
     label: 'Reference',
+    labelKey: 'sidebar.reference',
     children: [
-      { href: '/docs/error-codes', label: 'Error Codes' },
-      { href: '/docs/testing', label: 'Testing' },
+      { href: '/docs/error-codes', label: 'Error Codes', labelKey: 'sidebar.errorCodes' },
+      { href: '/docs/testing', label: 'Testing', labelKey: 'sidebar.testing' },
     ],
   },
 ]

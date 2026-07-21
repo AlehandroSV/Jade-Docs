@@ -32,6 +32,51 @@ export const en = {
   'cta.subtitle': 'Install Jade and build your first project in minutes.',
   'cta.readDocs': 'Read the docs',
 
+  // Code Example
+  'codeExample.title': 'Query builder',
+  'codeExample.description': 'Build queries with method chaining. No string interpolation, no SQL injection vectors. Conditions compile to parameterized queries.',
+  'codeExample.feature1': 'WHERE, ORDER BY, LIMIT, OFFSET',
+  'codeExample.feature2': 'AND / OR with band() / bor()',
+  'codeExample.feature3': 'Pagination helper',
+  'codeExample.feature4': 'Aggregate functions: count, sum, average',
+
+  // API page
+  'api.title': 'API Reference',
+  'api.description': 'Complete reference for all Jade methods and operators.',
+  'api.entityMethods': 'Entity Methods',
+  'api.conditionOperators': 'Condition Operators',
+  'api.returns': 'Returns',
+
+  // Examples page
+  'examples.title': 'Examples',
+  'examples.description': 'Practical examples for common Jade patterns.',
+
+  // Sidebar
+  'sidebar.gettingStarted': 'Getting Started',
+  'sidebar.introduction': 'Introduction',
+  'sidebar.installation': 'Installation',
+  'sidebar.quickStart': 'Quick Start',
+  'sidebar.configuration': 'Configuration',
+  'sidebar.schema': 'Schema',
+  'sidebar.overview': 'Overview',
+  'sidebar.columnTypes': 'Column Types',
+  'sidebar.columnModifiers': 'Column Modifiers',
+  'sidebar.relations': 'Relations',
+  'sidebar.queryBuilder': 'Query Builder',
+  'sidebar.security': 'Security',
+  'sidebar.encryption': 'Encryption',
+  'sidebar.securityFeatures': 'Security Features',
+  'sidebar.migrations': 'Migrations',
+  'sidebar.cli': 'CLI (Esmeralda)',
+  'sidebar.advanced': 'Advanced',
+  'sidebar.transactions': 'Transactions',
+  'sidebar.callbacks': 'Callbacks',
+  'sidebar.validations': 'Validations',
+  'sidebar.softDelete': 'Soft Delete',
+  'sidebar.reference': 'Reference',
+  'sidebar.errorCodes': 'Error Codes',
+  'sidebar.testing': 'Testing',
+
   // Footer
   'footer.copyright': 'Jade',
 }

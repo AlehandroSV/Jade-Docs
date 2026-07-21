@@ -1,19 +1,22 @@
 import { entityMethods, conditionOperators } from '../data/api'
 import CodeBlock from '../components/ui/CodeBlock'
+import { useLanguage } from '../contexts/LanguageContext'
 
 export default function API() {
+  const { t } = useLanguage()
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
       <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
-        API Reference
+        {t('api.title')}
       </h1>
       <p className="text-zinc-500 dark:text-zinc-400 mb-10">
-        Complete reference for all Jade methods and operators.
+        {t('api.description')}
       </p>
 
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
-          Entity Methods
+          {t('api.entityMethods')}
         </h2>
         <div className="space-y-8">
           {entityMethods.map((method) => (
@@ -25,7 +28,7 @@ export default function API() {
                 {method.description}
               </p>
               <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-3">
-                Returns: <code className="text-emerald-500 dark:text-emerald-400">{method.returns}</code>
+                {t('api.returns')}: <code className="text-emerald-500 dark:text-emerald-400">{method.returns}</code>
               </p>
               <CodeBlock code={method.example} language="lua" />
             </div>
@@ -35,7 +38,7 @@ export default function API() {
 
       <section>
         <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
-          Condition Operators
+          {t('api.conditionOperators')}
         </h2>
         <div className="space-y-6">
           {conditionOperators.map((op) => (

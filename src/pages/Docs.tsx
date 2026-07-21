@@ -1,13 +1,24 @@
 import { useParams, Link } from 'react-router-dom'
 import { useVersion } from '../contexts/VersionContext'
+import { useLanguage } from '../contexts/LanguageContext'
 import { docsSidebar } from '../data/navigation'
+import { docsSectionsPtBr } from '../data/docs-pt-br'
 import DocRenderer from '../components/ui/DocRenderer'
 
 export default function Docs() {
   const { section = 'introduction' } = useParams()
   const { currentVersion } = useVersion()
+  const { language, t } = useLanguage()
 
-  const current = currentVersion.sections.find(s => s.id === section) || currentVersion.sections[0]
+  // Use translated sections when available
+  const sections = language === 'pt-br'
+    ? currentVersion.sections.map(s => {
+        const translated = docsSectionsPtBr.find(ts => ts.id === s.id)
+        return translated || s
+      })
+    : currentVersion.sections
+
+  const current = sections.find(s => s.id === section) || sections[0]
 
   // Filter sidebar to only show sections available in current version
   const availableSectionIds = new Set(currentVersion.sections.map(s => s.id))
@@ -29,7 +40,7 @@ export default function Docs() {
               return (
                 <div key={group.href}>
                   <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-400 text-zinc-500 uppercase tracking-wider mb-2 px-3">
-                    {group.label}
+                    {group.labelKey ? t(group.labelKey as any) : group.label}
                   </div>
                   <div className="space-y-0.5">
                     {availableChildren.map((link) => (
@@ -42,7 +53,7 @@ export default function Docs() {
                             : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
                         }`}
                       >
-                        {link.label}
+                        {link.labelKey ? t(link.labelKey as any) : link.label}
                       </Link>
                     ))}
                   </div>
