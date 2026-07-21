@@ -1,4 +1,5 @@
 import { docsSections, type DocSection } from './docs'
+import { docsSectionsV1_1_0 } from './docs-v1.1.0'
 
 export interface Version {
   id: string
@@ -170,7 +171,7 @@ end`,
     id: 'v1.1.0',
     label: 'v1.1.0',
     isLatest: false,
-    sections: docsSections,
+    sections: docsSectionsV1_1_0,
   },
   {
     id: 'v1.2.0',
