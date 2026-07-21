@@ -2,6 +2,11 @@ import type { DocContent } from '../../data/docs'
 import CodeBlock from './CodeBlock'
 import { Link } from 'react-router-dom'
 
+/** Convert markdown bold **text** to <strong>text</strong> */
+function mdBold(text: string): string {
+  return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+}
+
 interface DocRendererProps {
   content: DocContent[]
 }
@@ -20,9 +25,10 @@ function DocItem({ item }: { item: DocContent }) {
   switch (item.type) {
     case 'paragraph':
       return (
-        <p className="text-zinc-300 dark:text-zinc-300 text-zinc-600 leading-relaxed">
-          {item.text}
-        </p>
+        <p
+          className="text-zinc-300 dark:text-zinc-300 text-zinc-600 leading-relaxed [&_strong]:font-semibold [&_strong]:text-zinc-100 dark:[&_strong]:text-zinc-100 [&_strong]:text-zinc-900"
+          dangerouslySetInnerHTML={{ __html: mdBold(item.text) }}
+        />
       )
 
     case 'heading': {
@@ -45,7 +51,10 @@ function DocItem({ item }: { item: DocContent }) {
           {item.items.map((li, i) => (
             <li key={i} className="flex items-start gap-2">
               <span className="mt-2 w-1 h-1 bg-emerald-500 rounded-full flex-shrink-0" />
-              <span dangerouslySetInnerHTML={{ __html: li }} />
+              <span
+                className="[&_strong]:font-semibold [&_strong]:text-zinc-100 dark:[&_strong]:text-zinc-100 [&_strong]:text-zinc-900"
+                dangerouslySetInnerHTML={{ __html: mdBold(li) }}
+              />
             </li>
           ))}
         </ul>
@@ -86,9 +95,10 @@ function DocItem({ item }: { item: DocContent }) {
         tip: 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 dark:text-emerald-300 text-emerald-700',
       }
       return (
-        <div className={`border-l-4 rounded-r-lg p-4 text-sm ${styles[item.variant]}`}>
-          {item.text}
-        </div>
+        <div
+          className={`border-l-4 rounded-r-lg p-4 text-sm [&_strong]:font-semibold ${styles[item.variant]}`}
+          dangerouslySetInnerHTML={{ __html: mdBold(item.text) }}
+        />
       )
     }
 
