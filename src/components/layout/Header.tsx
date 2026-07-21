@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 import { mainNav } from '../../data/navigation'
 import VersionSelector from '../ui/VersionSelector'
+import Logo from '../ui/Logo'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -14,8 +15,8 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
-          <Link to="/" className="text-zinc-900 dark:text-white font-semibold text-lg tracking-tight">
-            Jade
+          <Link to="/">
+            <Logo />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

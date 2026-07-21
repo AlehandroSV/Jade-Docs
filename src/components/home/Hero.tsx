@@ -23,13 +23,13 @@ local users = User:where(User.active:eq(true)):get()`
 
 export default function Hero() {
   return (
-    <section className="py-20 sm:py-32">
+    <section className="py-16 sm:py-24 lg:py-32 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-6 leading-tight">
             ORM for Lua that gets out of your way
           </h1>
-          <p className="text-lg text-zinc-500 dark:text-zinc-400 mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 mb-8 leading-relaxed">
             Jade gives you a declarative schema, automatic migrations, and a query builder
             that feels native to Lua. No magic, no hidden SQL.
           </p>
@@ -50,7 +50,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-12 sm:mt-16">
           <CodeBlock code={codeExample} language="lua" />
         </div>
       </div>
