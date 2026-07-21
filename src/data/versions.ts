@@ -9,8 +9,8 @@ export interface Version {
 
 export const versions: Version[] = [
   {
-    id: 'v1',
-    label: 'v1.0',
+    id: 'v1.0.0',
+    label: 'v1.0.0',
     isLatest: false,
     sections: [
       {
@@ -167,10 +167,10 @@ end`,
     ],
   },
   {
-    id: 'v2',
-    label: 'v2.0',
+    id: 'v1.1.0',
+    label: 'v1.1.0',
     isLatest: true,
-    sections: docsSections,  // Current full documentation
+    sections: docsSections,
   },
 ]
 
