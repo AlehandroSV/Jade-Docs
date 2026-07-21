@@ -1,7 +1,7 @@
 export interface NavItem {
   href: string
   label: string
-  labelKey?: string
+  labelKey: string
   children?: NavItem[]
 }
 
